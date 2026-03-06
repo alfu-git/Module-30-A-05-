@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module-30(A-05) | home</title>
+
+    <!-- tailwind + daisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="./styles/style.css" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-[#EEEEEE] min-h-screen">
+    <header>
+      <section class="bg-base-100 border-b border-[#E9E9E9]">
+        <div class="container mx-auto px-5">
+          <div class="flex flex-col gap-y-3 sm:flex-row gap-0 justify-between py-3">
+            <div class="flex gap-2 items-center">
+              <figure>
+                <img class="w-9 h-9" src="./images/github-logo.png" alt="github-logo">
+              </figure>
+              <a class="btn btn-ghost text-xl px-2">GitHub Issues Tracker</a>
+            </div>
+
+            <div class="flex gap-2">
+              <input
+                type="text"
+                placeholder="🔍 Search issues..."
+                class="input input-bordered w-24 md:w-auto"
+              />
+              <button id="search-btn" class="btn btn-primary py-3">
+                + New Issue
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <!-- JS -->
+    <script src="./js/home.js"></script>
+  </body>
+</html>
