@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="bg-[#EEEEEE]" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,10 +33,58 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
+  <body class="bg-base-100 rounded-lg shadow-lg sm:my-10 max-w-md mx-auto py-8 px-5">
+    <header>
+      <section class="mb-6">
+        <div class="flex flex-col justify-center items-center">
+          <figure class="mb-6">
+            <img src="./images/github-logo.png" alt="github-logo" />
+          </figure>
+          <div class="text-center">
+            <h1 class="mb-1 text-2xl text-[#1F2937] font-semibold">
+              GitHub Issue Tracker
+            </h1>
+            <p class="text-[#64748B]">Sign in to manage your issues</p>
+          </div>
+        </div>
+      </section>
+    </header>
 
-    
+    <main>
+      <section class="mb-6">
+        <div>
+          <form class="flex flex-col">
+            <label class="label mb-2 text-[#1F2937] font-medium">Username</label>
+            <input id="username" type="text" class="input mb-4 w-full" placeholder="Enter Username" />
+
+            <label class="label mb-2 text-[#1F2937] font-medium">Password</label>
+            <input id="password" type="password" class="input mb-4 w-full" placeholder="Password"/>
+
+            <button id="sign-in-btn" class="btn btn-primary mt-4 hover:bg-blue-700">Sign In</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <section>
+        <div class="space-y-6">
+          <div class="flex items-center">
+            <div class="grow border-t border-[#E4E4E7]"></div>
+            <span class="mx-2 text-[#1F2937] font-medium">OR</span>
+            <div class="grow border-t border-[#E4E4E7]"></div>
+          </div>
+          <div>
+            <h3 class="mb-2 text-sm text-[#64748B] text-center">Demo Credentials:</h3>
+            <div class="py-6 bg-[#F8FAFC] rounded-md flex flex-col items-center">
+              <p class="text-[#1F2937] font-medium">Username: <span class="text-[#1F2937] opacity-80">admin</span></p>
+              <p class="text-[#1F2937] font-medium">Password: <span class="text-[#1F2937] opacity-80">admin123</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
     <!-- JS -->
-    <script src="./js/script.js"></script>
+    <script src="./js/login.js"></script>
   </body>
 </html>
