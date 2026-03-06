@@ -1,3 +1,15 @@
 * {
   font-family: "Geist", sans-serif;
 }
+
+.active {
+  padding: 10px 20px;
+  background: #4A00FF;
+  color: white;
+}
+
+.inactive {
+  padding: 10px 20px;
+  background: transparent;
+  color: #64748B;
+}

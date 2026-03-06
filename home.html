@@ -35,7 +35,8 @@
   </head>
   <body class="bg-[#EEEEEE] min-h-screen">
     <header>
-      <section class="bg-base-100 border-b border-[#E9E9E9]">
+      <!-- header section -->
+      <section class="mb-15 bg-base-100 border-b border-[#E9E9E9]">
         <div class="container mx-auto px-5">
           <div class="flex flex-col gap-y-3 sm:flex-row gap-0 justify-between py-3">
             <div class="flex gap-2 items-center">
@@ -59,6 +60,21 @@
         </div>
       </section>
     </header>
+
+
+    <main>
+      <!-- tab section -->
+      <section class="container mx-auto px-5">
+        <div>
+          <div class="p-6 bg-base-100 rounded-lg space-x-2">
+            <button class="btn active">All</button>
+            <button class="btn inactive">Open</button>
+            <button class="btn inactive">Closed</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
 
     <!-- JS -->
     <script src="./js/home.js"></script>
