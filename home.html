@@ -64,12 +64,39 @@
 
     <main>
       <!-- tab section -->
-      <section class="container mx-auto px-5">
+      <section class="mb-4 container mx-auto px-5">
         <div>
           <div class="p-6 bg-base-100 rounded-lg space-x-2">
             <button class="btn active">All</button>
             <button class="btn inactive">Open</button>
             <button class="btn inactive">Closed</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- issue bar -->
+      <section class="container mx-auto px-5">
+        <div>
+          <div class="p-6 bg-base-100 rounded-lg flex gap-y-2 sm:gap-y-0 flex-col-reverse sm:flex-row justify-between sm:items-center">
+            <div class="flex gap-2 flex-row-reverse sm:flex-row items-center">
+              <div class="bg-[#ECE4FF] p-2 rounded-full">
+                <img src="./images/Aperture.png" alt="Aperture-logo">
+              </div>
+              <div>
+                <p class="text-[#1F2937] text-xl font-semibold"><span>50</span> Issue</p>
+                <p class="text-[#64748B] ">Track and manage your project issues</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <span class="text-[#1F2937] font-medium">
+                <span class="mr-0.5  inline-block w-2.5 h-2.5 rounded-full bg-[#00A96E]"></span> Open
+              </span>
+
+              <span class="text-[#1F2937] font-medium">
+                <span class="mr-0.5 inline-block w-2.5 h-2.5 rounded-full bg-[#A855F7]"></span> Close
+              </span>
+            </div>
           </div>
         </div>
       </section>
