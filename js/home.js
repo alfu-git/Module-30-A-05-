@@ -1,4 +1,4 @@
-// ============================================================================================ 
+// ============================================================================================
 //                                     HELPING FUNCTION
 // =============================================================================================
 
@@ -46,11 +46,11 @@ const setLabels = (arr) => {
 
 //========== CREATE FUNCTION TO CREATE ISSUE CARD ==========//
 const createIssueCard = (data) => {
-const issueCard = document.createElement("div");
-    issueCard.onclick = () => openModal(data.id);
-    issueCard.className = `p-4 bg-base-100 rounded-sm shadow-md border-t-3 ${data.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}`;
+  const issueCard = document.createElement("div");
+  issueCard.onclick = () => openModal(data.id);
+  issueCard.className = `p-4 bg-base-100 rounded-sm shadow-md border-t-3 ${data.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}`;
 
-    issueCard.innerHTML = `
+  issueCard.innerHTML = `
       <div class="mb-3 flex justify-between items-center">
         <span class="p-1 w-7 h-7 rounded-full flex justify-center items-center ${
           data.status === "open"
@@ -76,21 +76,19 @@ const issueCard = document.createElement("div");
       </div>
 
       <h2 class="mb-2 text-[#1F2937] text-sm font-semibold">${data.title}</h2>
-      <p class="line-clamp-2 mb-3 text-[#64748B] text-[12px]">${data.description}</p>
+      <p onclick="removeLineClamp()" class="line-clamp-2 mb-3 text-[#64748B] text-[12px]">${data.description}</p>
               
       <div class="flex flex-wrap gap-1.5">
         ${setLabels(data.labels)}  
       </div>
 
       <div class="mt-4 pt-4 border-t border-gray-400">
-        <span class="block mb-2 text-[#64748B] text-[12px]">#1 ${data.author}</span>
+        <span class="block mb-2 text-[#64748B] text-[12px]">#${data.id} ${data.author}</span>
         <span class="inline-block text-[#64748B] text-[12px]">${convertDate(data.createdAt)}</span>
       </div>
     `;
-    return issueCard;
-} 
-
-// ================================================================================================================================================================================================
+  return issueCard;
+};
 
 
 
@@ -110,6 +108,7 @@ const totalIssue = getId("total-issue");
 const spinner = getId("spinner");
 const issueModal = getId("issue-modal");
 const modalContainer = getId("modal-container");
+const searchBtn = getId("search-btn");
 let allIssueArr = [];
 
 //========== FUNCTION FOR ACTIVE EVERY TAB BTN ==========//
@@ -191,7 +190,7 @@ const openModal = async (id) => {
   const modalCard = document.createElement("div");
   modalCard.innerHTML = `
     <h3 class="mb-2 text-[#1F2937] text-2xl font-bold">${modalData.title}</h3>
-    <div class="flex gap-1 items-center">
+    <div class="flex flex-wrap gap-1 items-center">
       <span class="inline-block py-0.5 px-3 rounded-full text-sm text-base-100 ${
         modalData.status === "open" ? "bg-[#00A96E]" : "bg-[#A855F7]"
       }">
@@ -256,7 +255,7 @@ const openTabBtnActive = () => {
     setSpinner(true);
 
     const openTabIssue = allIssueArr.filter((issue) => issue.status === "open");
-    openIssueArr = openTabIssue;
+    const openIssueArr = openTabIssue;
 
     totalIssue.innerText = openIssueArr.length;
 
@@ -280,7 +279,7 @@ const closedTabBtnActive = () => {
     const closedTabIssue = allIssueArr.filter(
       (issue) => issue.status === "closed",
     );
-    closedIssueArr = closedTabIssue;
+    const closedIssueArr = closedTabIssue;
 
     totalIssue.innerText = closedIssueArr.length;
 
@@ -295,3 +294,29 @@ const closedTabBtnActive = () => {
   });
 };
 closedTabBtnActive();
+
+//========== SEARCH FUNCTION ==========//
+const searchOn = () => {
+  searchBtn.addEventListener("click", async () => {
+    let searchValue = getId("search-value").value.toLowerCase().trim();
+
+    if (!searchValue) {
+      loadAllIssue();
+      return;
+    }
+
+    setSpinner(true);
+
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const cards = data.data;
+
+    displayAllIssue(cards);
+
+    getId("search-value").value = "";
+
+    setSpinner(false);
+  });
+};
+searchOn();
