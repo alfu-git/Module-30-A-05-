@@ -6,6 +6,7 @@ const getId = (id) => {
 // all the variable
 const allIssueContainer = getId('all-issue-container');
 const totalIssue = getId('total-issue');
+const spinner = getId('spinner');
 const issueModal = getId('issue-modal');
 const modalContainer = getId('modal-container');
 
@@ -17,12 +18,26 @@ const setTotalIssue = () => {
   totalIssue.innerText = allIssueArr.length;
 }
 
+// create function to set spinner
+const setSpinner = (status) => {
+  if(status) {
+    spinner.classList.replace('hidden', 'flex');
+  }
+  else {
+    spinner.classList.replace('flex', 'hidden');
+  }
+}
+
 // load all issue
 const loadAllIssue = async() => {
-  const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
+  setSpinner(true);
 
+  const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
   const res = await fetch(url);
   const data = await res.json();
+
+  setSpinner(false);
+
   displayAllIssue(data.data);
 }
 loadAllIssue();
