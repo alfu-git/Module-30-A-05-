@@ -76,7 +76,7 @@ const createIssueCard = (data) => {
       </div>
 
       <h2 class="mb-2 text-[#1F2937] text-sm font-semibold">${data.title}</h2>
-      <p onclick="removeLineClamp()" class="line-clamp-2 mb-3 text-[#64748B] text-[12px]">${data.description}</p>
+      <p class="line-clamp-2 mb-3 text-[#64748B] text-[12px]">${data.description}</p>
               
       <div class="flex flex-wrap gap-1.5">
         ${setLabels(data.labels)}  
@@ -130,11 +130,6 @@ const activeBtns = () => {
 };
 activeBtns();
 
-//========= FUNCTION TO SET total-issue ==========//
-const setTotalIssue = () => {
-  totalIssue.innerText = allIssueArr.length;
-};
-
 //========== FUNCTION TO SET spinner ==========//
 const setSpinner = (status) => {
   if (status) {
@@ -162,6 +157,7 @@ loadAllIssue();
 const displayAllIssue = (issueData) => {
   allIssueContainer.innerHTML = "";
   allIssueArr = [];
+  totalIssue.innerText = issueData.length;
 
   issueData.forEach((data) => {
     // set total issue
@@ -171,19 +167,14 @@ const displayAllIssue = (issueData) => {
     const card = createIssueCard(data);
     allIssueContainer.appendChild(card);
   });
-  setTotalIssue();
 };
 
 //========== SET MODAL FUNCTION ==========//
 const openModal = async (id) => {
-  setSpinner(true);
-
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
   const res = await fetch(url);
   const data = await res.json();
   const modalData = data.data;
-
-  setSpinner(false);
 
   modalContainer.innerHTML = "";
 
@@ -217,7 +208,7 @@ const openModal = async (id) => {
 
     <div class="p-4 bg-[#F8FAFC] flex justify-between">
       <div>
-        <span class="block text-#[64748B]">Assignee:</span>
+        <span class="block text-[#64748B]">Assignee:</span>
         <span class="inline-block text-[#1F2937] font-semibold">${
           modalData.assignee !== "" ? modalData.assignee : "No Assignee"
         }
@@ -251,46 +242,34 @@ allTabBtnActive();
 
 //========== FUNCTION FOR openTabBtn ==========//
 const openTabBtnActive = () => {
-  openTabBtn.addEventListener("click", () => {
+  openTabBtn.addEventListener("click", async() => {
     setSpinner(true);
 
-    const openTabIssue = allIssueArr.filter((issue) => issue.status === "open");
-    const openIssueArr = openTabIssue;
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    totalIssue.innerText = openIssueArr.length;
+    const openIssues = data.data.filter(issue => issue.status === "open");
 
-    allIssueContainer.innerHTML = "";
-
-    openIssueArr.forEach((issue) => {
-      // create issueCard & then append the card in allIssueContainer
-      const card = createIssueCard(issue);
-      allIssueContainer.appendChild(card);
-    });
     setSpinner(false);
+    displayAllIssue(openIssues);
   });
 };
 openTabBtnActive();
 
 //========== FUNCTION FOR closedTabBtn ==========//
 const closedTabBtnActive = () => {
-  closedTabBtn.addEventListener("click", () => {
+  closedTabBtn.addEventListener("click", async() => {
     setSpinner(true);
 
-    const closedTabIssue = allIssueArr.filter(
-      (issue) => issue.status === "closed",
-    );
-    const closedIssueArr = closedTabIssue;
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    totalIssue.innerText = closedIssueArr.length;
+    const closedIssue = data.data.filter(issue => issue.status === 'closed');
 
-    allIssueContainer.innerHTML = "";
-
-    closedIssueArr.forEach((issue) => {
-      // create closed issue card by using createIssueCard function & then append the card in allIssueContainer
-      const card = createIssueCard(issue);
-      allIssueContainer.appendChild(card);
-    });
     setSpinner(false);
+    displayAllIssue(closedIssue);
   });
 };
 closedTabBtnActive();
