@@ -38,10 +38,16 @@
       <!-- header section -->
       <section class="mb-15 bg-base-100 border-b border-[#E9E9E9]">
         <div class="container mx-auto px-5">
-          <div class="flex flex-col gap-y-3 sm:flex-row gap-0 justify-between py-3">
+          <div
+            class="flex flex-col gap-y-3 sm:flex-row gap-0 justify-between py-3"
+          >
             <div class="flex gap-2 items-center">
               <figure>
-                <img class="w-9 h-9" src="./images/github-logo.png" alt="github-logo">
+                <img
+                  class="w-9 h-9"
+                  src="./images/github-logo.png"
+                  alt="github-logo"
+                />
               </figure>
               <a class="btn btn-ghost text-xl px-2">GitHub Issues Tracker</a>
             </div>
@@ -61,12 +67,11 @@
       </section>
     </header>
 
-
     <main>
       <!-- tab section -->
       <section class="mb-4 container mx-auto px-5">
         <div>
-          <div class="p-6 bg-base-100 rounded-lg space-x-2">
+          <div class="p-6 bg-base-100 shadow-lg rounded-md space-x-2">
             <button class="btn active">All</button>
             <button class="btn inactive">Open</button>
             <button class="btn inactive">Closed</button>
@@ -77,30 +82,67 @@
       <!-- issue bar -->
       <section class="container mx-auto px-5">
         <div>
-          <div class="p-6 bg-base-100 rounded-lg flex gap-y-2 sm:gap-y-0 flex-col-reverse sm:flex-row justify-between sm:items-center">
+          <div
+            class="p-6 bg-base-100 shadow-lg rounded-t-md border-b border-gray-400 flex gap-y-2 sm:gap-y-0 flex-col-reverse sm:flex-row justify-between sm:items-center"
+          >
             <div class="flex gap-2 flex-row-reverse sm:flex-row items-center">
               <div class="bg-[#ECE4FF] p-2 rounded-full">
-                <img src="./images/Aperture.png" alt="Aperture-logo">
+                <img src="./images/Aperture.png" alt="Aperture-logo" />
               </div>
               <div>
-                <p class="text-[#1F2937] text-xl font-semibold"><span>50</span> Issue</p>
-                <p class="text-[#64748B] ">Track and manage your project issues</p>
+                <p class="text-[#1F2937] text-xl font-semibold">
+                  <span id="total-issue"></span> Issue
+                </p>
+                <p class="text-[#64748B]">
+                  Track and manage your project issues
+                </p>
               </div>
             </div>
 
             <div class="flex items-center gap-4">
               <span class="text-[#1F2937] font-medium">
-                <span class="mr-0.5  inline-block w-2.5 h-2.5 rounded-full bg-[#00A96E]"></span> Open
+                <span
+                  class="mr-0.5 inline-block w-2.5 h-2.5 rounded-full bg-[#00A96E]"
+                ></span>
+                Open
               </span>
 
               <span class="text-[#1F2937] font-medium">
-                <span class="mr-0.5 inline-block w-2.5 h-2.5 rounded-full bg-[#A855F7]"></span> Close
+                <span
+                  class="mr-0.5 inline-block w-2.5 h-2.5 rounded-full bg-[#A855F7]"
+                ></span>
+                Close
               </span>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- all issue card section -->
+      <section class="container mx-auto px-5">
+        <div>
+          <div
+            id="all-issue-container"
+            class="p-6 bg-[#FBFBFB] rounded-b-md shadow-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          ></div>
+        </div>
+
+        <!-- set modal -->
+        <dialog id="issue-modal" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <div id="modal-container">
+              
+            </div>
+
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-primary text-base-100 font-bold">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </section>
     </main>
 
     <!-- JS -->
