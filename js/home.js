@@ -4,11 +4,32 @@ const getId = (id) => {
 }
 
 // all the variable
+const allBtn = document.querySelectorAll('#all-tab-btn, #open-tab-btn, #closed-tab-btn');
 const allIssueContainer = getId('all-issue-container');
 const totalIssue = getId('total-issue');
 const spinner = getId('spinner');
 const issueModal = getId('issue-modal');
 const modalContainer = getId('modal-container');
+
+// create function for active every tab btn
+const activeBtn = () => {
+  allBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+
+      // disable every btn
+      allBtn.forEach((btn) => {
+        btn.classList.remove('active');
+        btn.classList.add('inactive');
+      })
+
+      // active the target btn
+      const targetBtn = e.target.closest('button');
+      targetBtn.classList.remove('inactive');
+      targetBtn.classList.add('active');
+    })
+  })
+}
+activeBtn();
 
 // all the array
 let allIssueArr = [];
