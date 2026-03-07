@@ -98,7 +98,7 @@ const issueCard = document.createElement("div");
 //                                       UX FUNCTION
 // =============================================================================================
 
-//========== all the variable ==========//
+//========== ALL THE VARIABLE ==========//
 const allTabBtn = getId("all-tab-btn");
 const openTabBtn = getId("open-tab-btn");
 const closedTabBtn = getId("closed-tab-btn");
@@ -111,10 +111,8 @@ const spinner = getId("spinner");
 const issueModal = getId("issue-modal");
 const modalContainer = getId("modal-container");
 let allIssueArr = [];
-let openIssueArr = [];
-let closedIssueArr = [];
 
-//========== create function for active every tab btn ==========//
+//========== FUNCTION FOR ACTIVE EVERY TAB BTN ==========//
 const activeBtns = () => {
   allBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -133,12 +131,12 @@ const activeBtns = () => {
 };
 activeBtns();
 
-//========== create function to set total-issue ==========//
+//========= FUNCTION TO SET total-issue ==========//
 const setTotalIssue = () => {
   totalIssue.innerText = allIssueArr.length;
 };
 
-//========== create function to set spinner ==========//
+//========== FUNCTION TO SET spinner ==========//
 const setSpinner = (status) => {
   if (status) {
     spinner.classList.replace("hidden", "flex");
@@ -147,7 +145,7 @@ const setSpinner = (status) => {
   }
 };
 
-//========== load all issue ==========//
+//========== LOAD ALL ISSUE ==========//
 const loadAllIssue = async () => {
   setSpinner(true);
 
@@ -161,7 +159,7 @@ const loadAllIssue = async () => {
 };
 loadAllIssue();
 
-//=========== display all issue ==========//
+//=========== DISPLAY ALL ISSUE ==========//
 const displayAllIssue = (issueData) => {
   allIssueContainer.innerHTML = "";
   allIssueArr = [];
@@ -170,14 +168,14 @@ const displayAllIssue = (issueData) => {
     // set total issue
     allIssueArr.push(data);
 
-    // create issueCard & then append the card in allIssueContainer
+    // create open issue card by using createIssueCard function & then append the card in allIssueContainer
     const card = createIssueCard(data);
     allIssueContainer.appendChild(card);
   });
   setTotalIssue();
 };
 
-//========== set modal function ==========//
+//========== SET MODAL FUNCTION ==========//
 const openModal = async (id) => {
   setSpinner(true);
 
@@ -220,7 +218,7 @@ const openModal = async (id) => {
 
     <div class="p-4 bg-[#F8FAFC] flex justify-between">
       <div>
-        <span class="block text-[64748B]">Assignee:</span>
+        <span class="block text-#[64748B]">Assignee:</span>
         <span class="inline-block text-[#1F2937] font-semibold">${
           modalData.assignee !== "" ? modalData.assignee : "No Assignee"
         }
@@ -244,7 +242,7 @@ const openModal = async (id) => {
   issueModal.showModal();
 };
 
-//========== create function for allTabBtn ==========//
+//========== FUNCTION FOR allTabBtn ==========//
 const allTabBtnActive = () => {
   allTabBtn.addEventListener("click", () => {
     loadAllIssue();
@@ -252,7 +250,7 @@ const allTabBtnActive = () => {
 };
 allTabBtnActive();
 
-//========== create function for openTabBtn ==========//
+//========== FUNCTION FOR openTabBtn ==========//
 const openTabBtnActive = () => {
   openTabBtn.addEventListener("click", () => {
     setSpinner(true);
@@ -267,9 +265,33 @@ const openTabBtnActive = () => {
     openIssueArr.forEach((issue) => {
       // create issueCard & then append the card in allIssueContainer
       const card = createIssueCard(issue);
-      setSpinner(false);
       allIssueContainer.appendChild(card);
     });
+    setSpinner(false);
   });
 };
 openTabBtnActive();
+
+//========== FUNCTION FOR closedTabBtn ==========//
+const closedTabBtnActive = () => {
+  closedTabBtn.addEventListener("click", () => {
+    setSpinner(true);
+
+    const closedTabIssue = allIssueArr.filter(
+      (issue) => issue.status === "closed",
+    );
+    closedIssueArr = closedTabIssue;
+
+    totalIssue.innerText = closedIssueArr.length;
+
+    allIssueContainer.innerHTML = "";
+
+    closedIssueArr.forEach((issue) => {
+      // create closed issue card by using createIssueCard function & then append the card in allIssueContainer
+      const card = createIssueCard(issue);
+      allIssueContainer.appendChild(card);
+    });
+    setSpinner(false);
+  });
+};
+closedTabBtnActive();
